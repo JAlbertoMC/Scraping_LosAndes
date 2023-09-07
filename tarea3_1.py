@@ -1,4 +1,3 @@
-#Instalar Librerias requests y bs4
 import requests
 from bs4 import BeautifulSoup
 import csv
@@ -10,26 +9,26 @@ response = requests.get(url)
 if response.status_code == 200:
     soup = BeautifulSoup(response.content, 'html.parser')
 
-    # Encuentra todos los elementos con la clase "jeg_post_title" (títulos)
-    titles = soup.find_all(class_='jeg_post_title')
+    # BUSCA ELEMENTOS CON CLASE "jeg_post_titulo" para titulos
+    titulos = soup.find_all(class_='jeg_post_title')
 
-    # Encuentra todos los elementos con la clase "jeg_meta_date" (fechas)
-    dates = soup.find_all(class_='jeg_meta_date')
+    # BUSCA ELEMENTOS CON CLASE "jeg_meta_fecha" para fechas
+    fechas = soup.find_all(class_='jeg_meta_date')
 
     # Verifica que haya títulos y fechas disponibles
-    if titles and dates:
+    if titulos and fechas:
         # Abre un archivo CSV para escribir
-        with open('losandes.csv', 'w', newline='', encoding='utf-8-sig') as csvfile:
+        with open('Titulares_LosAndes.csv', 'w', newline='', encoding='utf-8-sig') as csvfile:
             archivo = csv.writer(csvfile)
 
             # Escribe el encabezado del CSV
-            archivo.writerow(['TITULO', 'FECHA'])
+            archivo.writerow(['TITULAR DEL DIA', 'FECHA'])
 
             # Itera a través de los títulos y fechas y escribe en el CSV
-            for title, date in zip(titles, dates):
-                titulo_texto = title.get_text(strip=True)
-                fecha_texto = date.get_text(strip=True)
-                archivo.writerow([titulo_texto, fecha_texto])
+            for titulo, fecha in zip(titulos, fechas):
+                titular_hoy = titulo.get_text(strip=True)
+                fecha_titular = fecha.get_text(strip=True)
+                archivo.writerow([titular_hoy, fecha_titular])
 
         print("Archivo CSV creado correctamente.")
     else:
