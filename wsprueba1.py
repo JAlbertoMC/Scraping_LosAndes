@@ -90,21 +90,3 @@ if conn is not None:
     conn.close()
 else:
     print("No se pudo conectar a la base de datos.")
-
-
-""" Base de Datos: XAMPP
-
-En PHPMyAdmin
-Crear Database: midba
-
-# Codigo SQL para crear tablas en midba
-
-CREATE TABLE tabla_de_resultados (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    palabra_clave VARCHAR(255),
-    links VARCHAR(255),
-    detalles VARCHAR(5000),
-    fecha VARCHAR(255)
-);
-
-"""
